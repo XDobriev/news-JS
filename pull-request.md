@@ -1,60 +1,57 @@
-# Pull Request: News API (Migration from JS to TS)
-
 1. **Task:** [News API FullStack](https://github.com/rolling-scopes-school/tasks/blob/master/fullstack-engineering/tasks/TS-news-api/migration-newip-to-ts.md)
 2. **Screenshot:**
 
-   ![News Portal screenshot](https://raw.githubusercontent.com/rolling-scopes-school/xdobriev-JSFE2025Q3/gh-pages/pr-assets/screenshot.png)
+   ![News Portal screenshot](https://raw.githubusercontent.com/XDobriev/news-JS/gh-pages/pr-assets/screenshot.png)
 
-3. **Deploy:** [https://rolling-scopes-school.github.io/xdobriev-JSFE2025Q3/](https://rolling-scopes-school.github.io/xdobriev-JSFE2025Q3/) (зеркало: [https://rolling-scopes-school.github.io/xdobriev-JSFE2025Q3/news-api/](https://rolling-scopes-school.github.io/xdobriev-JSFE2025Q3/news-api/))
+3. **Deploy:** [https://xdobriev.github.io/news-JS/](https://xdobriev.github.io/news-JS/)
 4. **Done:** 02.11.2026
 5. **Score:** 170 / 170
 
----
+## Описание выполненной работы
 
-### Pull Request Description
-- Complete migration of the News API application from JavaScript to strictly typed TypeScript.
-- Set up and configured Webpack with `ts-loader` for `.ts` files and modern module resolution.
-- Integrated ESLint with `@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`, and `typescript-eslint/recommended` preset.
-- Strictly prohibited and eliminated all occurrences of the `any` type (`@typescript-eslint/no-explicit-any: error`).
-- Configured `tsconfig.json` with `"strict": true` and `"noImplicitAny": true`.
-- Applied TypeScript concepts across all layers:
+- Выполнена полная миграция приложения News API с JavaScript на строго типизированный TypeScript.
+- Webpack настроен для работы с TypeScript через `ts-loader` и расширения `.ts`.
+- Подключен ESLint с плагинами `@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`, пресетом `typescript-eslint/recommended`.
+- Использование типа `any` полностью запрещено правилом `@typescript-eslint/no-explicit-any: error` и исключено из всего кода приложения (0 вхождений).
+- В `tsconfig.json` включены обязательные строгие флаги `"strict": true` и `"noImplicitAny": true`.
+- В кодовой базе применены все требуемые концепции TypeScript:
   - **Enums**: `HttpMethod`, `Endpoint`, `HttpStatus`.
-  - **Generics**: Generic `load<T>` and `getResp<T>` methods, typed callback `Callback<T>`.
-  - **Interfaces & Object Types**: `NewsSource`, `NewsArticle`, `SourcesApiResponse`, `EverythingApiResponse`, `ApiRequest`, `LoaderOptions`.
-  - **Utility Types**: `Pick` (`Pick<NewsSource, 'id' | 'name'>`), `Partial` (`Partial<Record<string, string | number>>`), `Readonly` (`Readonly<NewsArticle>`), and `ReadonlyArray`.
-  - **Access Modifiers**: `public`, `private`, `protected`, `readonly` on class members.
-  - **Union & Function Types**: Explicit function signatures, typed callbacks, and event listener narrowing.
-- Implemented responsive and adaptive design from `320px` to `1920px` with CSS variables, modern dark aesthetic, smooth pill-scroller for news sources, and alternating desktop card layouts.
-- Added UX features & robustness:
-  - Real-time article search/filter by keyword.
-  - Active source indicator highlighting the currently loaded channel with auto-scroll.
-  - Interactive loading spinner, resilient error state recovery, and empty states.
-  - Keyboard navigation (Enter / Space) for news source selection.
-  - Self-contained SVG image placeholder eliminating external CDN failures.
-- Styled footer with RS School logo and link to course, author GitHub link, and creation year.
+  - **Generics**: обобщенные методы `getResp<T>`, `load<T>`, типы `Callback<T>`, `Nullable<T>`.
+  - **Interfaces**: `NewsSource`, `NewsArticle`, `SourcesApiResponse`, `EverythingApiResponse`, `ApiRequest`.
+  - **Utility Types**: `Pick` (`Pick<NewsSource, 'id' | 'name'>`), `Partial` (`Partial<Record<string, string | number>>`), `Readonly` (`Readonly<NewsArticle>`), `ReadonlyArray`.
+  - **Access Modifiers**: `public`, `private`, `protected`, `readonly` на всех классах (`Loader`, `AppLoader`, `AppController`, `AppView`, `News`, `Sources`, `App`).
+  - **Union Types**: объединения типов данных, статусов ответа и параметров запросов.
+- Реализована адаптивная и отзывчивая вёрстка от `320px` до `1920px` с CSS-переменными, темной темой, гибкими карточками и горизонтальной прокруткой источников.
+- Дополнительные улучшения UX:
+  - Живой поиск/фильтрация статей по ключевым словам.
+  - Индикация активного источника с авто-скроллом выбранного таба.
+  - Спиннер загрузки, карточка ошибки и обработка пустых состояний.
+  - Поддержка выбора источников с клавиатуры (`Enter` / `Space`).
+  - Векторная офлайн-заглушка изображений (SVG Data URI) без внешних сетевых зависимостей.
+- Футер содержит ссылку на GitHub автора, год создания (2024) и логотип RS School со ссылкой на курс.
 
 ---
 
-### Evaluation Criteria Checklist (170 / 170 points)
+## Самооценка (170 / 170 баллов)
 
-#### 1. Repository Setup (40 / 40 points)
-- [x] **(20 points)** Pull request is made in accordance with the Pull Request Requirements.
-- [x] **(20 points)** Commit history is maintained, and commit names follow the Commit Convention (`feat:`, `chore:`, `refactor:`, `docs:`, `fix:`).
+### 1. Repository Setup — 40 / 40
+- [x] **(20 баллов)** Pull Request создан в соответствии с требованиями курса (из ветки разработки `news-api` в `main` своего форка).
+- [x] **(20 баллов)** История коммитов отражает процесс разработки, сообщения оформлены по [Commit Convention](https://rs.school/docs/git-convention) (`feat:`, `chore:`, `refactor:`, `docs:`, `fix:`).
 
-#### 2. Code Quality (100 / 100 points)
-- [x] **(50 points)** The application is fully migrated to TypeScript:
-  - [x] **(10 points)** Everyday Types and Enums are used (`HttpMethod`, `Endpoint`, `HttpStatus`).
-  - [x] **(10 points)** Generics are used (`getResp<T>`, `load<T>`, `Callback<T>`).
-  - [x] **(10 points)** Object Types & Interfaces are used (`NewsSource`, `NewsArticle`, `SourcesApiResponse`, `EverythingApiResponse`).
-  - [x] **(10 points)** Classes and access modifiers (`private`, `public`, `protected`, `readonly`) are used across all classes (`Loader`, `AppLoader`, `AppController`, `AppView`, `News`, `Sources`, `App`).
-  - [x] **(10 points)** Function Types are used.
-- [x] **(10 points)** ESLint is configured for TypeScript with `no-explicit-any` enabled and 0 errors.
-- [x] **(10 points)** The `any` type isn't used anywhere in the codebase.
-- [x] **(20 points)** The TypeScript configuration file includes `"noImplicitAny": true` and `"strict": true`.
-- [x] **(10 points)** Webpack is configured to work with TypeScript (`ts-loader`, `.ts` entry and extensions).
+### 2. Code Quality & TypeScript Migration — 100 / 100
+- [x] **(50 баллов)** Приложение полностью переведено на TypeScript:
+  - [x] **(10 баллов)** Everyday Types и Enums (`HttpMethod`, `Endpoint`, `HttpStatus`).
+  - [x] **(10 баллов)** Generics (`getResp<T>`, `load<T>`, `Callback<T>`).
+  - [x] **(10 баллов)** Object Types & Interfaces (`NewsSource`, `NewsArticle`, `SourcesApiResponse`, `EverythingApiResponse`).
+  - [x] **(10 баллов)** Классы и модификаторы доступа (`private`, `public`, `protected`, `readonly`) во всех классах.
+  - [x] **(10 баллов)** Function Types и сигнатуры колбэков.
+- [x] **(10 баллов)** ESLint настроен для TypeScript, правило `no-explicit-any` включено, 0 ошибок.
+- [x] **(10 баллов)** Тип `any` нигде не используется в проекте.
+- [x] **(20 баллов)** В файле конфигурации TypeScript (`tsconfig.json`) установлены обязательные флаги `"noImplicitAny": true` и `"strict": true`.
+- [x] **(10 баллов)** Webpack настроен для работы с TypeScript (`ts-loader`, расширения `['.ts', '.js']`).
 
-#### 3. Design and Application Functionality (30 / 30 points)
-- [x] **(10 points)** Adaptive layout is implemented (`320px` - `1920px`).
-- [x] **(20 points)** Custom design improvements: modern dark theme, active source pill indicators, live article keyword search/filter, loading spinner, resilient error recovery, self-contained SVG placeholder, and responsive cards.
+### 3. Design and Application Functionality — 30 / 30
+- [x] **(10 баллов)** Адаптивная верстка (`320px` - `1920px`).
+- [x] **(20 баллов)** Улучшенный дизайн и функционал: живой поиск статей, подсветка активного источника, лоадер, экран ошибки, автономный SVG-плейсхолдер, доступность с клавиатуры.
 
-**Total Score: 170 / 170**
+**Итого: 170 / 170**
