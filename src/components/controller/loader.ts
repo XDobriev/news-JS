@@ -1,12 +1,4 @@
-import {
-    ApiRequest,
-    Callback,
-    Endpoint,
-    HttpMethod,
-    HttpStatus,
-    LoaderOptions,
-    RequestOptions,
-} from '../../types';
+import { ApiRequest, Callback, Endpoint, HttpMethod, HttpStatus, LoaderOptions, RequestOptions } from '../../types';
 
 class Loader {
     protected readonly baseLink: string;
@@ -39,12 +31,12 @@ class Loader {
 
     private makeUrl(options: RequestOptions, endpoint: Endpoint | string): string {
         const urlOptions: RequestOptions = { ...this.options, ...options };
-        const normalizedBase: string = this.baseLink.endsWith('/')
-            ? this.baseLink
-            : `${this.baseLink}/`;
+        const normalizedBase: string = this.baseLink.endsWith('/') ? this.baseLink : `${this.baseLink}/`;
 
         let resolvedEndpoint: string = endpoint;
-        const hasApiKey: boolean = Boolean(this.options.apiKey && this.options.apiKey.trim().length > 0);
+        const apiKey: string | number | undefined = this.options.apiKey;
+        const hasApiKey: boolean = typeof apiKey === 'string' && apiKey.trim().length > 0;
+
         if (!hasApiKey && normalizedBase.includes('rss-news-api.onrender.com')) {
             if (endpoint === Endpoint.Sources || endpoint === 'sources') {
                 resolvedEndpoint = Endpoint.MocksSources;

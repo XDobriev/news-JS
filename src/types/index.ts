@@ -68,10 +68,7 @@ export interface ApiRequest {
     readonly options?: RequestOptions;
 }
 
-export type LoaderOptions = Partial<{
-    apiKey: string;
-    [key: string]: string | number | boolean | undefined;
-}>;
+export type LoaderOptions = Partial<Record<string, string | number>>;
 
 export type Callback<T> = (data: T) => void;
 
