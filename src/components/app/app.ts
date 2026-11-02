@@ -16,22 +16,36 @@ class App {
 
         if (sourcesElement) {
             sourcesElement.addEventListener('click', (e: MouseEvent): void => {
-                let target: EventTarget | null = e.target;
-                while (target && target !== sourcesElement) {
-                    if (target instanceof HTMLElement && target.classList.contains('source__item')) {
-                        const sourceId: string | null = target.getAttribute('data-source-id');
-                        if (sourceId) {
-                            this.view.highlightSource(sourceId);
-                            this.view.setLoading(true);
-                        }
-                        break;
-                    }
-                    target = (target as HTMLElement).parentElement;
+                const target: HTMLElement | null = (e.target as HTMLElement).closest('.source__item');
+                if (!target) {
+                    return;
+                }
+
+                const sourceId: string | null = target.getAttribute('data-source-id');
+                const currentSourceId: string | null = sourcesElement.getAttribute('data-source');
+
+                if (sourceId && sourceId === currentSourceId) {
+                    return;
+                }
+
+                if (sourceId) {
+                    this.view.highlightSource(sourceId);
+                    this.view.setLoading(true);
                 }
 
                 this.controller.getNews(e, (data: EverythingApiResponse): void => {
                     this.view.drawNews(data);
                 });
+            });
+
+            sourcesElement.addEventListener('keydown', (e: KeyboardEvent): void => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const target: HTMLElement | null = (e.target as HTMLElement).closest('.source__item');
+                    if (target) {
+                        e.preventDefault();
+                        target.click();
+                    }
+                }
             });
         }
 
@@ -46,7 +60,6 @@ class App {
         this.view.setLoading(true);
         this.controller.getSources((data: SourcesApiResponse): void => {
             this.view.drawSources(data);
-            this.view.setLoading(false);
 
             const firstSource: HTMLElement | null = document.querySelector('.source__item');
             if (firstSource) {

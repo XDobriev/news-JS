@@ -3,7 +3,7 @@ import { NewsArticle, ReadonlyArticlesList } from '../../../types';
 
 class News {
     private readonly defaultImage: string =
-        'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 360' width='100%25' height='100%25'%3E%3Crect width='600' height='360' fill='%23171d26'/%3E%3Cpath d='M230 220l45-55 55 65 35-40 60 70H175z' fill='%2338bdf8' opacity='0.35'/%3E%3Ccircle cx='235' cy='135' r='22' fill='%2338bdf8' opacity='0.45'/%3E%3Ctext x='50%25' y='82%25' dominant-baseline='middle' text-anchor='middle' fill='%238b949e' font-family='sans-serif' font-size='18' font-weight='600'%3ENo Preview Available%3C/text%3E%3C/svg%3E";
 
     public draw(data: ReadonlyArticlesList): void {
         const newsContainer: HTMLElement | null = document.querySelector('.news');
@@ -41,8 +41,9 @@ class News {
 
             const photoElement: HTMLElement | null = newsClone.querySelector('.news__meta-photo');
             if (photoElement) {
-                const imageUrl: string = item.urlToImage || this.defaultImage;
-                photoElement.style.backgroundImage = `url("${imageUrl}")`;
+                const rawUrl: string = item.urlToImage || this.defaultImage;
+                const safeUrl: string = rawUrl.replace(/"/g, '\\"');
+                photoElement.style.backgroundImage = `url("${safeUrl}")`;
             }
 
             const authorElement: HTMLElement | null = newsClone.querySelector('.news__meta-author');
@@ -92,19 +93,13 @@ class News {
             return '';
         }
 
-        try {
-            const date: Date = new Date(isoDate);
-            if (!isNaN(date.getTime())) {
-                const day: string = String(date.getDate()).padStart(2, '0');
-                const month: string = String(date.getMonth() + 1).padStart(2, '0');
-                const year: number = date.getFullYear();
-                return `${day}-${month}-${year}`;
-            }
-        } catch {
-            // fallback to string slicing
+        const datePart: string = isoDate.slice(0, 10);
+        const parts: string[] = datePart.split('-');
+        if (parts.length === 3) {
+            return parts.reverse().join('-');
         }
 
-        return isoDate.slice(0, 10).split('-').reverse().join('-');
+        return datePart;
     }
 }
 

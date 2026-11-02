@@ -43,6 +43,7 @@ class Sources {
         sourceItems.forEach((element: HTMLElement): void => {
             if (element.getAttribute('data-source-id') === sourceId) {
                 element.classList.add('source__item--active');
+                element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
             } else {
                 element.classList.remove('source__item--active');
             }

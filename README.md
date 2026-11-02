@@ -15,8 +15,9 @@ A responsive single-page web application for browsing global news headlines, mig
 - **UX Enhancements**:
   - **Live Search / Filter**: Filter displayed articles by keywords in real-time.
   - **Active Source Highlight**: Visual feedback indicating the currently selected channel.
-  - **Loading & Empty States**: Clean loader spinner during requests and helpful empty states.
-  - **Fallback Imagery**: Safe image fallbacks for missing article preview photos.
+  - **Loading, Error & Empty States**: Clean loader spinner during requests, error recovery, and helpful empty states.
+  - **Fallback Imagery**: Self-contained SVG image fallback for missing article preview photos (works 100% offline).
+  - **Keyboard Accessibility**: Full keyboard navigation (Enter / Space) for selecting news channels.
 - **Footer Attribution**:
   - Author GitHub profile link.
   - Course year `2024`.

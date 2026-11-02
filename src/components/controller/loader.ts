@@ -29,13 +29,26 @@ class Loader {
         return res;
     }
 
+    private isValidApiKey(key: unknown): boolean {
+        if (typeof key !== 'string') {
+            return false;
+        }
+        const trimmed: string = key.trim();
+        return (
+            trimmed.length >= 10 &&
+            !trimmed.includes(' ') &&
+            !trimmed.includes('http') &&
+            !trimmed.toLowerCase().includes('get your own')
+        );
+    }
+
     private makeUrl(options: RequestOptions, endpoint: Endpoint | string): string {
         const urlOptions: RequestOptions = { ...this.options, ...options };
         const normalizedBase: string = this.baseLink.endsWith('/') ? this.baseLink : `${this.baseLink}/`;
 
         let resolvedEndpoint: string = endpoint;
         const apiKey: string | number | undefined = this.options.apiKey;
-        const hasApiKey: boolean = typeof apiKey === 'string' && apiKey.trim().length > 0;
+        const hasApiKey: boolean = this.isValidApiKey(apiKey);
 
         if (!hasApiKey && normalizedBase.includes('rss-news-api.onrender.com')) {
             if (endpoint === Endpoint.Sources || endpoint === 'sources') {
@@ -68,7 +81,31 @@ class Loader {
             .then((res: Response): Response => this.errorHandler(res))
             .then((res: Response): Promise<T> => res.json())
             .then((data: T): void => callback(data))
-            .catch((err: unknown): void => console.error(err));
+            .catch((err: unknown): void => {
+                console.error(err);
+
+                const normalizedBase: string = this.baseLink.endsWith('/') ? this.baseLink : `${this.baseLink}/`;
+                const isProxy: boolean = normalizedBase.includes('rss-news-api.onrender.com');
+
+                if (isProxy && (endpoint === Endpoint.Sources || endpoint === 'sources')) {
+                    this.load<T>(method, Endpoint.MocksSources, callback, options);
+                    return;
+                }
+
+                if (isProxy && (endpoint === Endpoint.Everything || endpoint === 'everything')) {
+                    this.load<T>(method, Endpoint.MocksEverything, callback, options);
+                    return;
+                }
+
+                const errorMessage: string = err instanceof Error ? err.message : 'Network request failed';
+                callback({
+                    status: 'error',
+                    message: errorMessage,
+                    sources: [],
+                    articles: [],
+                    totalResults: 0,
+                } as unknown as T);
+            });
     }
 }
 

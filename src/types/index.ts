@@ -74,5 +74,8 @@ export type Callback<T> = (data: T) => void;
 
 export type Nullable<T> = T | null;
 
-export type ReadonlySourcesList = ReadonlyArray<NewsSource>;
-export type ReadonlyArticlesList = ReadonlyArray<NewsArticle>;
+export type ReadonlyNewsSource = Readonly<NewsSource>;
+export type ReadonlyNewsArticle = Readonly<NewsArticle>;
+
+export type ReadonlySourcesList = ReadonlyArray<ReadonlyNewsSource>;
+export type ReadonlyArticlesList = ReadonlyArray<ReadonlyNewsArticle>;
