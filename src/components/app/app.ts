@@ -22,6 +22,7 @@ class App {
                         const sourceId: string | null = target.getAttribute('data-source-id');
                         if (sourceId) {
                             this.view.highlightSource(sourceId);
+                            this.view.setLoading(true);
                         }
                         break;
                     }
@@ -34,8 +35,23 @@ class App {
             });
         }
 
+        const searchInput: HTMLInputElement | null = document.querySelector('#newsSearch');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e: Event): void => {
+                const target: HTMLInputElement = e.target as HTMLInputElement;
+                this.view.filterNews(target.value);
+            });
+        }
+
+        this.view.setLoading(true);
         this.controller.getSources((data: SourcesApiResponse): void => {
             this.view.drawSources(data);
+            this.view.setLoading(false);
+
+            const firstSource: HTMLElement | null = document.querySelector('.source__item');
+            if (firstSource) {
+                firstSource.click();
+            }
         });
     }
 }
