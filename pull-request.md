@@ -1,7 +1,15 @@
 # Pull Request: News API (Migration from JS to TS)
 
-### Task Link
-[News API FullStack](https://github.com/rolling-scopes-school/tasks/blob/master/fullstack-engineering/tasks/TS-news-api/migration-newip-to-ts.md)
+1. **Task:** [News API FullStack](https://github.com/rolling-scopes-school/tasks/blob/master/fullstack-engineering/tasks/TS-news-api/migration-newip-to-ts.md)
+2. **Screenshot:**
+
+   ![News Portal screenshot](https://raw.githubusercontent.com/rolling-scopes-school/xdobriev-JSFE2025Q3/gh-pages/pr-assets/screenshot.png)
+
+3. **Deploy:** [https://rolling-scopes-school.github.io/xdobriev-JSFE2025Q3/](https://rolling-scopes-school.github.io/xdobriev-JSFE2025Q3/) (зеркало: [https://rolling-scopes-school.github.io/xdobriev-JSFE2025Q3/news-api/](https://rolling-scopes-school.github.io/xdobriev-JSFE2025Q3/news-api/))
+4. **Done:** 02.11.2026
+5. **Score:** 170 / 170
+
+---
 
 ### Pull Request Description
 - Complete migration of the News API application from JavaScript to strictly typed TypeScript.
@@ -31,7 +39,7 @@
 
 #### 1. Repository Setup (40 / 40 points)
 - [x] **(20 points)** Pull request is made in accordance with the Pull Request Requirements.
-- [x] **(20 points)** Commit history is maintained, and commit names follow the Commit Convention (`feat:`, `chore:`, `refactor:`, `docs:`).
+- [x] **(20 points)** Commit history is maintained, and commit names follow the Commit Convention (`feat:`, `chore:`, `refactor:`, `docs:`, `fix:`).
 
 #### 2. Code Quality (100 / 100 points)
 - [x] **(50 points)** The application is fully migrated to TypeScript:
@@ -50,4 +58,3 @@
 - [x] **(20 points)** Custom design improvements: modern dark theme, active source pill indicators, live article keyword search/filter, loading spinner, resilient error recovery, self-contained SVG placeholder, and responsive cards.
 
 **Total Score: 170 / 170**
-
