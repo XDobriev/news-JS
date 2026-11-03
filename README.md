@@ -20,7 +20,7 @@ A responsive single-page web application for browsing global news headlines, mig
   - **Keyboard Accessibility**: Full keyboard navigation (Enter / Space) for selecting news channels.
 - **Footer Attribution**:
   - Author GitHub profile link.
-  - Course year `2024`.
+  - Course year `2026`.
   - RS School logo with course link.
 
 ## 🛠️ Tech Stack
