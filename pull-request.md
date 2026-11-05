@@ -1,7 +1,11 @@
 1. **Task:** [News API FullStack](https://github.com/rolling-scopes-school/tasks/blob/master/fullstack-engineering/tasks/TS-news-api/migration-newip-to-ts.md)
 2. **Screenshot:**
 
-   ![News Portal screenshot](https://raw.githubusercontent.com/XDobriev/news-JS/gh-pages/pr-assets/screenshot.png)
+   ![News Portal screenshot](https://xdobriev.github.io/news-JS/pr-assets/screenshot.png)
+
+   > 📷 **Ссылки на скриншот (если у вас блокируется отображение картинок):**  
+   > - [Прямая ссылка на скриншот (GitHub Pages)](https://xdobriev.github.io/news-JS/pr-assets/screenshot.png)  
+   > - [Просмотр файла скриншота в репозитории](https://github.com/XDobriev/news-JS/blob/news-api/pr-assets/screenshot.png)
 
 3. **Deploy:** [https://xdobriev.github.io/news-JS/](https://xdobriev.github.io/news-JS/)
 4. **Done:** 02.11.2026
@@ -28,7 +32,7 @@
   - Спиннер загрузки, карточка ошибки и обработка пустых состояний.
   - Поддержка выбора источников с клавиатуры (`Enter` / `Space`).
   - Векторная офлайн-заглушка изображений (SVG Data URI) без внешних сетевых зависимостей.
-- Футер содержит ссылку на GitHub автора, год создания (2026) и логотип RS School со ссылкой на курс.
+- Футер содержит ссылку на GitHub автора, год создания (2024) и логотип RS School со ссылкой на курс.
 
 ---
 
