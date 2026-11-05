@@ -1,34 +1,78 @@
 .sources {
     display: flex;
     flex-wrap: nowrap;
+    gap: 0.625rem;
     width: 100%;
-    height: 120px;
-    overflow: auto;
-    align-items: center;
-    font: 300 1em 'Fira Sans', sans-serif;
+    padding: 0.5rem 0.25rem 1rem 0.25rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Custom modern scrollbar for sources */
+.sources::-webkit-scrollbar {
+    height: 6px;
+}
+
+.sources::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 9999px;
+}
+
+.sources::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 9999px;
+    transition: background 0.2s;
+}
+
+.sources::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
 }
 
 .source__item {
-    background: none;
-    border: 2px solid #30c5ff;
-    font: inherit;
-    line-height: 1;
-    margin: 0.5em;
-    padding: 1em 2em;
-    color: #70d6ff;
-    transition: 0.25s;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.2;
     cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    outline: none;
 }
 
-.source__item:hover,
-.source__item:focus {
-    border-color: #3fcc59;
-    color: #69db7e;
-    box-shadow: 0 0.5em 0.5em -0.4em #3fcc59;
-    transform: translateY(-0.25em);
+.source__item:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.source__item:focus-visible {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+.source__item:active {
+    transform: translateY(0);
+}
+
+.source__item--active {
+    background: rgba(56, 189, 248, 0.15) !important;
+    border-color: var(--accent-primary) !important;
+    color: var(--accent-primary) !important;
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
 }
 
 .source__item-name {
-    font-weight: 400;
     white-space: nowrap;
 }
